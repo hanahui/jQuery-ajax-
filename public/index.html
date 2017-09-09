@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<div class="container">
+</div>
+<button class="button">点击加载更多</button>
+</body>
+</html>
+<script src="javascripts/jquery-3.2.1.min.js"></script>
+<script src="javascripts/ejs.js"></script>
+<script>
+    var a = {}
+    a.page = 3
+    $(function () {
+        function ren() {
+            $.get('/index',a).done(function (data) {
+                //数据库数据总条数
+                var sum = data.count
+                var htmlStr = new EJS({url: "/tpl/index.ejs"}).render(data,{
+                    sum:sum
+                });
+                $(".container").html(htmlStr);
+            })
+        }
+        ren()
+        $('.button').on('click', function () {
+            a.page += 2
+            $.get('/index', a)
+            ren()
+        })
+        $(window).bind("scroll",function(){
+//            判断窗口的滚动条是否到达底部
+            if($(window).scrollTop() >= ($(document).height() - $(window).height())){
+                a.page += 1
+                $.get('/index', a)
+                ren()
+            }else {
+                return;
+            }
+        })
+    })
+</script>

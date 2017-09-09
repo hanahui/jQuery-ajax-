@@ -1,0 +1,23 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+a {
+  color: #00B7FF;
+}
+.container{
+  line-height: 50px;
+}
+p{
+  width: 60%;
+  max-width: 800px;
+  border: 1px solid red;
+  text-align: center;
+  margin: 10px auto;
+}
+button{
+  margin-bottom:50px;
+}
+
